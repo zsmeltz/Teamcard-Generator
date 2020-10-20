@@ -10,22 +10,91 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-var initPrompt = [{
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
+
+const initPrompt = {
     type: "list",
     message:"Would you like to add a team member?",
     choices: ["Yes", "No thanks"],
     name: "initiate"
-},
-{
-    type: "list",
-    message: "What type of team member would you like to add?",
-    choices: ["Engineer", "Intern", "Manager"]
-}];
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+};
+
+inquirer.prompt(initPrompt).then(function(resp){
+    console.log('resp is',resp);
+    if(resp.initiate === initPrompt.choices[0]){
+        console.clear();
+       getEmployeeData();
+    }else{
+      console.clear();   
+     console.log("Heard.");
+    }
+        
+}).catch(err => {
+    console.log(err);
+});
+
+function getEmployeeData(){
+console.log('i went here')
+const employeeData = [
+    {
+        type: "input",
+        message: "Employee's Name: ",
+        name: "name"
+    },{
+        type: "input",
+        message: "Employee's ID: ",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "Employee's Email: ",
+        name: "email"
+    },
+    {
+        type: "list",
+        message: "What's the employee's role?",
+        choices: ["Engineer", "Intern", "Manager"],
+        name: "role"
+    }
+];
+inquirer.prompt(employeeData).then(function (resp){
+    console.log(resp);
+    getClassData(resp);
+}).catch(err => {console.log(err)})
+//console.log(response);
+};
+
+function getClassData(resp){
+
+if(resp.role === "Engineer"){
+
+const engineer = {
+        type: "input",
+        message: "Employee's GitHub Username: ",
+        name: "github"
+    };
+};
+
+const intern = {
+    type: "input",
+    message: "Employee's School: ",
+    name: "school"
+};
+
+const manager = {
+    type: "input",
+    message: "What is your office number?",
+    name: "officeNumber"
+};
+
+};
 
 
-inquirer.prompt(empInfo).then(function(empData){});
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
