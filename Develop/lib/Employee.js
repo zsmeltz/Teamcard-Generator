@@ -1,8 +1,8 @@
 // TODO: Write code to define and export the Employee class
-// const Manager = require("./lib/Manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
-// const app = require("../app.js");
+//const Manager = require("./lib/Manager");
+//const Engineer = require("./Engineer");
+//const Intern = require("./Intern");
+//const app = require("../app.js");
 
 class Employee {
     constructor(name, id, email, role){
@@ -26,15 +26,10 @@ class Employee {
     }
 
     getRole(){
-
+        return "Employee";
     }
 
 };
 
-
-var ob = new Employee("Tom", 1, "t@t.com");
-var ob2 = new Employee("Jerry", 2, "j@j.com");
-console.log(ob);
-ob.getName();
 
 module.exports = Employee;
