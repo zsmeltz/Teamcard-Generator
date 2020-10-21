@@ -11,7 +11,8 @@
     "test": "jest --verbose test/*",
     "testEmployee": "jest --verbose test/Employee.test.js",
     "testEngineer": "jest --verbose test/Engineer.test.js",
-    "testManager": "jest --verbose test/Manager.test.js"
+    "testManager": "jest --verbose test/Manager.test.js",
+    "testIntern": "jest --verbose test/Intern.test.js"
   },
   "repository": {
     "type": "git",
