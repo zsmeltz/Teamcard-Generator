@@ -10,12 +10,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+var html = []; 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 initialEyes();
 
 function initialEyes() {
-    // console.clear();
+
 const initPrompt = [{
     type: "list",
     message:"Would you like to add a team member?",
@@ -33,6 +34,14 @@ const rolePrompt = [{
 inquirer.prompt(initPrompt).then(function(resp){
     
     if(resp.initiate === initPrompt[0].choices[1]){
+       if(html.length > 0){
+           let out = render(html);
+           console.log(out);
+           fs.writeFile(outputPath, out, function(err){
+            if(err) throw err;
+            console.log(err);
+           });
+       };
        console.clear();
        console.log("App has been exited");
     }else{
@@ -74,9 +83,8 @@ function employeeData(role){
     ];
     inquirer.prompt(managerInput).then(function(managerData){
         console.log(managerData);
-        let managerInfo = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber, role);
-        let managerArray = [managerInfo];
-        render(managerArray);
+        let managerInfo = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber, role);     
+        html.push(managerInfo);
         initialEyes();
     });
 
@@ -103,8 +111,7 @@ function employeeData(role){
     inquirer.prompt(engineerInput).then(function(engineerData){
         console.log('data is',engineerData);
         let endineer = new Engineer(engineerData.name, engineerData.id,engineerData.email, engineerData.githubUsername, role);
-        let envineer = [endineer];
-        render(envineer);
+        html.push(endineer);
         initialEyes();
     }).catch(err=>{console.log(err)});
 
@@ -131,9 +138,10 @@ function employeeData(role){
     ];
     inquirer.prompt(internInput).then(function(internData){
         console.log(internData);
-        let internInfo = new Intern(internData.name, internData.id, internData.email, internData.school, role);
-        let internArray = [internInfo];
-        render(internArray);
+       let internInfo = new Intern(internData.name, internData.id, internData.email, internData.school, role);
+       html.push(internInfo);
+       console.log(html);
+     
         initialEyes();
     });
     }

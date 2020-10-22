@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const templatesDir = path.resolve(__dirname, "./.templates");
+const templatesDir = path.resolve(__dirname, "/Users/zachsmelcer/Documents/classActivities/Homework/teamcard-hw/zs-teamcard-hw/Develop/templates");
 
 
 const render = employees => {
@@ -30,6 +30,7 @@ const renderManager = manager => {
   template = replacePlaceholders(template, "email", manager.getEmail());
   template = replacePlaceholders(template, "id", manager.getId());
   template = replacePlaceholders(template, "officeNumber", manager.getOfficeNumber());
+  console.log("Im in renderManager and before 'return template'");
   return template;
 };
 
