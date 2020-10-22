@@ -1,21 +1,21 @@
-//const Manager = require("./lib/Manager");
+const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-//const Intern = require("./lib/Intern");
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-// const OUTPUT_DIR = path.resolve(__dirname, "output");
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-// const render = require("./lib/htmlRenderer");
+const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 initialEyes();
 
 function initialEyes() {
-    console.clear();
+    // console.clear();
 const initPrompt = [{
     type: "list",
     message:"Would you like to add a team member?",
@@ -23,7 +23,7 @@ const initPrompt = [{
     name: "initiate"
 }];
 
-const rolePromt = [{
+const rolePrompt = [{
     type: "list",
     message: "Select team member's role:",
     choices: ["Manager", "Engineer", "Intern"],
@@ -36,7 +36,7 @@ inquirer.prompt(initPrompt).then(function(resp){
        console.clear();
        console.log("App has been exited");
     }else{
-        inquirer.prompt(rolePromt).then(function(rsp) {
+        inquirer.prompt(rolePrompt).then(function(rsp) {
             console.log(rsp.role)
             console.clear();
             employeeData(rsp.role);
@@ -61,11 +61,6 @@ function employeeData(role){
             type: "input",
             message: "Manager's ID?",
             name: "id"
-        },{
-            type: "list",
-            message: "Hit enter please",
-            choices: ["Manager"],
-            name: "role"
         },
         {
             type: "input",
@@ -79,6 +74,9 @@ function employeeData(role){
     ];
     inquirer.prompt(managerInput).then(function(managerData){
         console.log(managerData);
+        let managerInfo = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber, role);
+        let managerArray = [managerInfo];
+        render(managerArray);
         initialEyes();
     });
 
@@ -104,9 +102,10 @@ function employeeData(role){
     ];
     inquirer.prompt(engineerInput).then(function(engineerData){
         console.log('data is',engineerData);
-        let endineer = new Engineer(engineerData.name, engineerData.id,engineerData.email,role, engineerData.githubUsername);
-        console.log('class is ', endineer);
-        //initialEyes();
+        let endineer = new Engineer(engineerData.name, engineerData.id,engineerData.email, engineerData.githubUsername, role);
+        let envineer = [endineer];
+        render(envineer);
+        initialEyes();
     }).catch(err=>{console.log(err)});
 
 
@@ -121,11 +120,6 @@ function employeeData(role){
             message: "Intern's ID?",
             name: "id"
         },{
-            type: "list",
-            message: "Hit enter please",
-            choices: ["Intern"],
-            name: "role"
-        },{
             type: "input",
             message: "What's the Intern's email?",
             name: "email"
@@ -137,19 +131,13 @@ function employeeData(role){
     ];
     inquirer.prompt(internInput).then(function(internData){
         console.log(internData);
+        let internInfo = new Intern(internData.name, internData.id, internData.email, internData.school, role);
+        let internArray = [internInfo];
+        render(internArray);
         initialEyes();
     });
     }
 };
-
-
-
-
-
-
-
-
-
 
 
 // After the user has input all employees desired, call the `render` function (required
