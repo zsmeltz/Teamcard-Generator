@@ -30,5 +30,5 @@ This application has gone through tests via the tests folder in the application.
 
 ## Questions? 
 Contact me:
+
 GitHub: [zsmeltz](https://github.com/zsmeltz) 
-Email: null
