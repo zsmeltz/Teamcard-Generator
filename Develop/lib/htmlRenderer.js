@@ -5,7 +5,6 @@ const templatesDir = path.resolve(__dirname, "/Users/zachsmelcer/Documents/class
 
 const render = employees => {
   const html = [];
-console.log("I'm here in render");
   html.push(...employees
     .filter(employee => employee.getRole() === "Manager")
     .map(manager => renderManager(manager))
@@ -30,7 +29,6 @@ const renderManager = manager => {
   template = replacePlaceholders(template, "email", manager.getEmail());
   template = replacePlaceholders(template, "id", manager.getId());
   template = replacePlaceholders(template, "officeNumber", manager.getOfficeNumber());
-  console.log("Im in renderManager and before 'return template'");
   return template;
 };
 
